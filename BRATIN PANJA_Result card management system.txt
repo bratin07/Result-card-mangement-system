@@ -1,0 +1,206 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<stdio.h>
+#include<iomanip.h>
+#include<ctype.h>
+struct student
+{
+	int s_id;
+	char s_name[50];
+	char f_name[50];
+	char m_name[50];
+	char dob[50];
+	char address[100];
+	int standard;
+	long ph_no;
+	float marks[6];
+	float total;
+	float per;
+	};
+void marks_entry(student s[],int i)
+{
+	cout<<"Enter the marks in English::"<<endl;
+	cin>>s[i].marks[0];
+	cout<<"Enter the marks in Physics::"<<endl;
+	cin>>s[i].marks[1];
+	cout<<"Enter the marks in Mathematics::"<<endl;
+	cin>>s[i].marks[2];
+	cout<<"Enter the marks in Chemistry::"<<endl;
+	cin>>s[i].marks[3];
+	cout<<"Enter the marks in Computer Science::"<<endl;
+	cin>>s[i].marks[4];
+	cout<<"Enter the marks in Physical Education::"<<endl;
+	cin>>s[i].marks[5];
+	cout<<setw(30)<<"******************************"<<endl;
+	}
+void enrollment(student s[],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+	cout<<"Enter Student's Id::"<<endl;
+	cin>>(s[i].s_id);
+	cout<<"Enter Student's Name::"<<endl;
+	gets(s[i].s_name);
+	cout<<"Enter Father's Name::"<<endl;
+	gets(s[i].f_name);
+	cout<<"Enter Mother's Name::"<<endl;
+	gets(s[i].m_name);
+	cout<<"Enter Date Of Birth::"<<endl;
+	gets(s[i].dob);
+	cout<<"Enter Address::"<<endl;
+	gets(s[i].address);
+	cout<<"Enter Standard::"<<endl;
+	cin>>s[i].standard;
+	cout<<"Enter Phone Number::"<<endl;
+	cin>>s[i].ph_no;
+	marks_entry(s,i);
+	}
+}
+void calculate(student s[],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+	float total=0,min=0;
+	for(int j=0;j<6;j++)
+	{
+	min = s[i].marks[1];
+	if(s[i].marks[1]>s[i].marks[j+1])
+	min=min+s[i].marks[j+1];
+	total=total+s[i].marks[j];
+	}
+	s[i].total=total-min;
+	s[i].per=(s[i].total*100)/500;
+	}
+}
+void show(student s[ ],int n)
+{
+	clrscr();
+	char ch;
+	for(int i=0;i<n;i++)
+	{
+	cout <<setw(35)<<"****************"<<"Report Card"<<"****************"<<endl;
+	cout<<"Student Id :"<<s[i].s_id<<endl;
+	cout<<"Student's Name :"<<s[i].s_name<<endl;
+	cout<<"Father's Name :"<<s[i].f_name<<endl;
+	cout<<"Mother's Name :"<<s[i].m_name<<endl;
+	cout<<"Date Of Birth :"<<s[i].dob<<endl;
+	cout<<"Phone Number :"<<s[i].ph_no<<endl;
+	cout<<"Standard :"<<s[i].standard<<endl;
+	cout<<"Total :"<<s[i].total<<endl;
+	cout<<"Percentage :"<<s[i].per<<endl;
+	cout<<setw(40)<<"******************************"<<endl;
+	getch() ;
+	}
+	}
+
+void Delete(student s[],int &n)
+{
+	char ch;
+	int id,y;
+	do
+	{
+	cout<<"Do you want to delete student information :"<<endl;
+	cout<<"Press y for yes";
+	cin>>ch;
+	if(ch=='y')
+	{
+		cout<<"Enter student id to be deleted : "<<endl;
+		cin>>id;
+		for(int i=0;i<n;i++)
+		{
+			if(s[i].s_id==id)
+			{
+			for(int j=i;j<n;j++)
+			s[j]=s[j+1];
+			}
+		}
+			n--;
+	   }
+	}while(tolower(ch)=='y');
+	show(s,n);
+	}
+void modify(student s[],int n)
+{
+	int p,id=0,k[6];
+	long u;
+	char q[50],w[50],l[50],r[50],t[100];
+	cout<<"Enter student id to be modified::";
+	cin>>id;
+	for(int i=0;i<n;i++)
+	if(s[i].s_id==id)
+	{
+	cout<<"Enter new name::"<<endl;
+	gets(q);
+	strcpy(s[i].s_name,q);
+	cout<<"Enter new Father's Name::"<<endl;
+	gets(w);
+	strcpy(s[i].f_name,w);
+	cout<<"Enter new Mother's Name::"<<endl;
+	gets(l);
+	strcpy(s[i].m_name,l);
+	cout<<"Enter new Date Of Birth::"<<endl;
+	gets(r);
+	strcpy(s[i].dob,r);
+	cout<<"Enter new Address::"<<endl;
+	gets(t);
+	strcpy(s[i].address,t);
+	cout<<"Enter new Standard::"<<endl;
+	cin>>p;
+	s[i].standard=p;
+	cout<<"Enter new Phone Number::"<<endl;
+	cin>>u;
+	s[i].ph_no = u;
+	cout<<"Enter new Marks";
+	for(int j=0;j<6;j++)
+	{
+	cin>>k[j];
+	s[i].marks[j]=k[j];
+	}
+	}
+	show(s,n);
+	}
+/*void show(student s[ ],int n)
+{
+	clrscr();
+	char ch;
+	for(int i=0;i<n;i++)
+	{
+	cout <<setw(35)<<"****************"<<"Report Card"<<"****************"<<endl;
+	cout<<"Student Id :"<<s[i].s_id<<endl;
+	cout<<"Student's Name :"<<s[i].s_name<<endl;
+	cout<<"Father's Name :"<<s[i].f_name<<endl;
+	cout<<"Mother's Name :"<<s[i].m_name<<endl;
+	cout<<"Date Of Birth :"<<s[i].dob<<endl;
+	cout<<"Phone Number :"<<s[i].ph_no<<endl;
+	cout<<"Standard :"<<s[i].standard<<endl;
+	cout<<"Total :"<<s[i].total<<endl;
+	cout<<"Percentage :"<<s[i].per<<endl;
+	cout<<setw(40)<<"******************************"<<endl;
+	getch() ;
+	}
+	}
+	*/
+
+	void main()
+	{
+	clrscr();
+	cout<<"******************** WELCOME TO MY PROJECT *****************\n ";
+	int n=0;
+	student s[100];
+
+		cout<<"1.Enrollment Of Students :\n";
+		cout<<"2.Information About Students :\n";
+		cout<<"3.Delete The Enrollment Of Students :\n";
+		cout<<"4.Modify The Enrollment Of Students :\n";
+		cout<<"\n***************************************************\n";
+
+	cout<<"Enter number of students to be Enrolled In Database :: ";
+	cin>>n;
+		enrollment(s,n);
+		calculate(s,n);
+		show(s,n);
+		Delete(s,n);
+		modify(s,n);
+	getch();
+	}
